@@ -31,11 +31,11 @@
   </div>
 </template>
 <script>
-  import SidebarLink from './SidebarLink.vue'
+  
 
   export default {
     components: {
-      SidebarLink
+      'SidebarLink': () => import('./SidebarLink.vue')
     },
     props: {
       title: {

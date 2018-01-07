@@ -87,7 +87,7 @@
         </div>
 
         <div class="col-md-4">
-          <chart-card :chart-data="pieChart.data" chart-type="Pie">
+          <chart-card :chart-data="pieChart.data" chart-type="Pie" :chart-options="pieChart.options">
             <template slot="header">
               <h4 class="card-title">Email Statistics</h4>
               <p class="card-category">Last Campaign Performance</p>
@@ -170,19 +170,14 @@
   </div>
 </template>
 <script>
-  import ChartCard from '../../../components/UIComponents/Cards/ChartCard.vue'
-  import StatsCard from '../../../components/UIComponents/Cards/StatsCard.vue'
-  import Card from '../../../components/UIComponents/Cards/Card.vue'
-  import LTable from '../../../components/UIComponents/Table.vue'
-  import Checkbox from '../../../components/UIComponents/Inputs/Checkbox.vue'
 
   export default {
     components: {
-      Checkbox,
-      Card,
-      LTable,
-      ChartCard,
-      StatsCard
+      'Checkbox': () => import('components/UIComponents/Inputs/Checkbox.vue'),
+      'Card': () => import('components/UIComponents/Cards/Card.vue'),
+      'LTable': () => import('components/UIComponents/Table.vue'),
+      'ChartCard': () => import('components/UIComponents/Cards/ChartCard.vue'),
+      'StatsCard': () => import('components/UIComponents/Cards/StatsCard.vue')
     },
     data () {
       return {
@@ -192,13 +187,18 @@
           data: {
             labels: ['40%', '20%', '40%'],
             series: [40, 20, 40]
+          },
+          options: {
+            plugins: [
+               tooltip()
+             ]
           }
         },
         lineChart: {
           data: {
             labels: ['9:00AM', '12:00AM', '3:00PM', '6:00PM', '9:00PM', '12:00PM', '3:00AM', '6:00AM'],
             series: [
-              [287, 385, 490, 492, 554, 586, 698, 695],
+              [{meta: 'description', value: 287}, {meta: 'description', value: 385}, {meta: 'description', value: 490}, {meta: 'description', value: 492}, {meta: 'description', value: 554}, {meta: 'description', value: 586}, {meta: 'description', value: 698}, {meta: 'description', value: 695}],
               [67, 152, 143, 240, 287, 335, 435, 437],
               [23, 113, 67, 108, 190, 239, 307, 308]
             ]
@@ -215,9 +215,15 @@
             showLine: true,
             showPoint: true,
             fullWidth: true,
+            plugins: [
+               tooltip({
+                currency: '$',
+               })
+             ],
             chartPadding: {
               right: 50
             }
+           
           },
           responsiveOptions: [
             ['screen and (max-width: 640px)', {
@@ -242,7 +248,10 @@
             axisX: {
               showGrid: false
             },
-            height: '245px'
+            height: '245px',
+            plugins: [
+               tooltip()
+             ]
           },
           responsiveOptions: [
             ['screen and (max-width: 640px)', {
@@ -270,8 +279,46 @@
         }
       }
     }
-  }
+  };
 </script>
-<style>
 
+<style >
+.ct-chart {
+    position: relative;
+}
+
+.ct-tooltip {
+    position: absolute;
+    display: inline-block;
+    min-width: 5em;
+    padding: 8px 10px;
+    background: #383838;
+    color: #fff;
+    text-align: center;
+    pointer-events: none;
+    z-index: 100;
+    transition: opacity .2s linear;
+    border-radius: 5px;
+}
+
+.ct-tooltip:before {
+    position: absolute;
+    bottom: -14px;
+    left: 50%;
+    border: solid transparent;
+    content: ' ';
+    height: 0;
+    width: 0;
+    pointer-events: none;
+    border-color: rgba(251, 249, 228, 0);
+    border-top-color: #383838;
+    border-width: 7px;
+    margin-left: -8px;
+}
+
+.ct-tooltip.hide {
+    display: block;
+    opacity: 0;
+    visibility: hidden;
+}
 </style>

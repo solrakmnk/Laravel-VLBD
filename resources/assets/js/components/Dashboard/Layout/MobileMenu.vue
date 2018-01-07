@@ -35,11 +35,10 @@
   </ul>
 </template>
 <script>
-  import DropDown from '../../../components/UIComponents/Dropdown.vue'
-
+  
   export default {
     components: {
-      DropDown
+      'DropDown': () => import('components/UIComponents/Dropdown.vue')
     }
   }
 </script>

@@ -1,4 +1,4 @@
-let mix = require('laravel-mix');
+let { mix } = require('laravel-mix');
 
 /*
  |--------------------------------------------------------------------------
@@ -11,11 +11,24 @@ let mix = require('laravel-mix');
  |
  */
  mix.webpackConfig({
-    output: {
-      publicPath: "/",
-      chunkFilename: 'js/[name].[chunkhash].js'
-    },
-  })
+   output: {
+     publicPath: "/",
+     chunkFilename: 'js/[name].[chunkhash].js'
+   },
+   resolve: {
+     alias: {
+       'components': path.resolve(__dirname, 'resources/assets/js/components'),
+       'styles': path.resolve(__dirname, 'resources/assets')
+     }
+   }
+ })
 
 mix.js('resources/assets/js/app.js', 'public/js')
-   .sass('resources/assets/sass/app.scss', 'public/css');
+   .sass('resources/assets/sass/app.scss', 'public/css')
+   .extract(['vue', 
+             'chartist-plugin-tooltip', 
+             'vue-router', 
+             'chartist', 
+             'v-tooltip', 
+             'vue-notifyjs'
+             ]);

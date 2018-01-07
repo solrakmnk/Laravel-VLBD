@@ -1,65 +1,54 @@
-import DashboardLayout from '../components/Dashboard/Layout/DashboardLayout.vue'
-// GeneralViews
-import NotFound from '../components/GeneralViews/NotFoundPage.vue'
 
-// Admin pages
-import Overview from '../components/Dashboard/Views/Overview.vue'
-import UserProfile from '../components/Dashboard/Views/UserProfile.vue'
-import TableList from '../components/Dashboard/Views/TableList.vue'
-import Typography from '../components/Dashboard/Views/Typography.vue'
-import Icons from '../components/Dashboard/Views/Icons.vue'
-import Maps from '../components/Dashboard/Views/Maps.vue'
-import Notifications from '../components/Dashboard/Views/Notifications.vue'
 
 const routes = [
   {
     path: '/',
-    component: DashboardLayout,
+    component: ()=> import('components/Dashboard/Layout/DashboardLayout.vue'),
     redirect: '/admin/overview'
   },
   {
     path: '/admin',
-    component: DashboardLayout,
+    component: ()=> import('components/Dashboard/Layout/DashboardLayout.vue'),
     redirect: '/admin/overview',
     children: [
       {
         path: 'overview',
         name: 'Overview',
-        component: Overview
+        component: ()=> import('components/Dashboard/Views/Overview.vue')
       },
       {
         path: 'user',
         name: 'User',
-        component: UserProfile
+        component: ()=> import('components/Dashboard/Views/UserProfile.vue')
       },
       {
         path: 'table-list',
         name: 'Table List',
-        component: TableList
+        component: ()=> import('components/Dashboard/Views/TableList.vue')
       },
       {
         path: 'typography',
         name: 'Typography',
-        component: Typography
+        component: ()=> import('components/Dashboard/Views/Typography.vue')
       },
       {
         path: 'icons',
         name: 'Icons',
-        component: Icons
+        component: ()=> import('components/Dashboard/Views/Icons.vue')
       },
       {
         path: 'maps',
         name: 'Maps',
-        component: Maps
+        component: ()=> import('components/Dashboard/Views/Maps.vue')
       },
       {
         path: 'notifications',
         name: 'Notifications',
-        component: Notifications
+        component: ()=> import('components/Dashboard/Views/Notifications.vue')
       }
     ]
   },
-  { path: '*', component: NotFound }
+  { path: '*', component: ()=> import('components/GeneralViews/NotFoundPage.vue') }
 ]
 
 /**

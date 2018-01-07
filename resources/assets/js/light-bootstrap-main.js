@@ -11,8 +11,8 @@ import SideBar from './components/UIComponents/SidebarPlugin'
 // asset imports
 import 'bootstrap/dist/css/bootstrap.css'
 import 'vue-notifyjs/themes/default.scss'
-import '../../assets/sass/app.scss'
-import '../../assets/css/demo.css'
+import 'styles/sass/app.scss'
+import 'styles/css/demo.css'
 
 // library auto imports
 //import 'es6-promise/auto'

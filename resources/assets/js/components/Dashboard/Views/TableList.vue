@@ -38,8 +38,7 @@
   </div>
 </template>
 <script>
-  import LTable from '../../../components/UIComponents/Table.vue'
-  import Card from '../../../components/UIComponents/Cards/Card.vue'
+
   const tableColumns = ['Id', 'Name', 'Salary', 'Country', 'City']
   const tableData = [{
     id: 1,
@@ -78,8 +77,8 @@
   }]
   export default {
     components: {
-      LTable,
-      Card
+      'LTable':() => import('components/UIComponents/Table.vue'),
+      'Card':() => import('components/UIComponents/Cards/Card.vue')
     },
     data () {
       return {

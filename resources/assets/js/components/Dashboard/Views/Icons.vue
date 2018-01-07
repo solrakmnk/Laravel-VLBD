@@ -620,12 +620,12 @@
   </div>
 </template>
 <script>
-  import Card from '../../../components/UIComponents/Cards/Card.vue'
+  
   export default {
-    components: {
-      Card
-    }
-  }
+   components: {
+    'Card': () => import('components/UIComponents/Cards/Card.vue')
+   }
+  };
 </script>
 <style>
 

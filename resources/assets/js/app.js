@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import App from './App.vue'
 
+
 // LightBootstrap plugin
 import LightBootstrap from './light-bootstrap-main.js'
 
@@ -11,6 +12,9 @@ import routes from './routes/routes.js'
 Vue.use(VueRouter)
 Vue.use(LightBootstrap)
 
+window.tooltip = require('chartist-plugin-tooltip');
+
+
 // configure router
 const router = new VueRouter({
   mode: 'history',
@@ -18,9 +22,10 @@ const router = new VueRouter({
   routes: routes
 })
 
+
 /* eslint-disable no-new */
 new Vue({
-  el: '#app',
-  render: h => h(App),
+  
+  render: (h) => h(App),
   router
-})
+}).$mount('#app');

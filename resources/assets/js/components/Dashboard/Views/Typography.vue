@@ -84,11 +84,11 @@
   </div>
 </template>
 <script>
-  import Card from '../../../components/UIComponents/Cards/Card.vue'
+  
 
   export default {
     components: {
-      Card
+    'Card':() => import('components/UIComponents/Cards/Card.vue')
     }
   }
 
